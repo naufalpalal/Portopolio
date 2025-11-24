@@ -3,34 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portofolio Interaktif | [Nama Anda] - TRPL Web Developer</title>
+    <meta name="description" content="Portofolio interaktif Naufal Palal, Calon Insinyur TRPL dan Web Developer. Lihat proyek, keahlian, dan hubungi untuk peluang magang.">
+    <meta name="keywords" content="TRPL, Web Developer, Bootstrap, Tailwind, Portofolio, Magang">
+    <meta name="author" content="Naufal Palal">
+    <title>Portofolio Interaktif | Naufal Palal - TRPL Web Developer</title>
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"> <!-- Library AOS untuk animasi scroll -->
     
     <style>
         :root {
             --primary-color: #007bff; /* Biru cerah */
             --secondary-color: #6c757d;
+            --accent-color: #ff6b6b; /* Merah muda untuk aksen */
             --background-light: #f4f7f6;
+            --dark-bg: #212529;
         }
 
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: 'Poppins', sans-serif; /* Font lebih modern */
             background-color: var(--background-light);
             scroll-behavior: smooth;
+            overflow-x: hidden;
         }
 
-        /* Hero Section dengan Parallax Sederhana */
+        /* Hero Section dengan Parallax dan Gradient */
         .hero-section {
-            background: linear-gradient(135deg, #e0f7fa 0%, var(--background-light) 100%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%), url('https://source.unsplash.com/featured/?technology,code') no-repeat center center/cover;
             padding: 120px 0;
-            min-height: 90vh;
+            min-height: 100vh;
             display: flex;
             align-items: center;
+            position: relative;
+            color: white;
+        }
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 1;
+        }
+        .hero-section .container {
+            position: relative;
+            z-index: 2;
         }
         
-        /* Foto Profil */
+        /* Foto Profil dengan Efek Glow */
         .profile-img {
             width: 250px;
             height: 250px;
@@ -38,42 +61,97 @@
             border-radius: 50%;
             border: 8px solid var(--primary-color);
             transition: all 0.5s ease;
+            box-shadow: 0 0 20px rgba(0, 123, 255, 0.5);
         }
         .profile-img:hover {
-            transform: scale(1.05) rotate(3deg); /* Efek Interaktif */
-            box-shadow: 0 10px 30px rgba(0, 123, 255, 0.3);
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 0 40px rgba(0, 123, 255, 0.8);
         }
 
-        /* Card Proyek Interaktif */
+        /* Typing Effect untuk Judul */
+        .typing {
+            border-right: 3px solid;
+            animation: blink-caret 1s step-end infinite;
+        }
+        @keyframes blink-caret {
+            from, to { border-color: transparent; }
+            50% { border-color: white; }
+        }
+
+        /* Card Proyek dengan Hover Efek */
         .project-card {
             border: none;
-            border-radius: 15px;
+            border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s ease;
+            background: linear-gradient(145deg, #ffffff, #f0f0f0);
         }
         .project-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
         }
 
-        /* Efek Fade In */
+        /* Skills dengan Progress Bar */
+        .skill-bar {
+            background: #e9ecef;
+            border-radius: 10px;
+            overflow: hidden;
+            height: 10px;
+        }
+        .skill-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            transition: width 1.5s ease;
+        }
+
+        /* Animasi Fade In dengan AOS */
         .fade-in-element {
             opacity: 0;
-            transform: translateY(20px);
+            transform: translateY(30px);
             transition: opacity 0.8s ease-out, transform 0.8s ease-out;
         }
-        .fade-in-element.is-visible {
+        .fade-in-element.aos-animate {
             opacity: 1;
             transform: translateY(0);
+        }
+
+        /* Button Keren */
+        .btn-custom {
+            background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+            border: none;
+            color: white;
+            transition: all 0.3s ease;
+        }
+        .btn-custom:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 123, 255, 0.4);
+        }
+
+        /* Footer dengan Gradient */
+        footer {
+            background: linear-gradient(135deg, var(--dark-bg), #343a40);
+        }
+
+        /* Particle Background (Opsional, tapi keren) */
+        #particles-js {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
         }
     </style>
 </head>
 <body>
 
+    <!-- Particle Background untuk Efek Keren -->
+    <div id="particles-js"></div>
+
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top shadow">
         <div class="container">
-            <a class="navbar-brand fw-bold text-warning" href="#">[Nama Panggilan]</a>
+            <a class="navbar-brand fw-bold text-warning" href="#">Naufal Palal</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -83,73 +161,79 @@
                     <li class="nav-item"><a class="nav-link" href="#about">Tentang Saya</a></li>
                     <li class="nav-item"><a class="nav-link" href="#skills">Keahlian</a></li>
                     <li class="nav-item"><a class="nav-link" href="#projects">Proyek</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Kontak</a></li>
                 </ul>
             </div>
         </div>
     </nav>
 
     <section id="home" class="hero-section text-center">
-        <div class="container fade-in-element">
+        <div class="container fade-in-element" data-aos="fade-up">
             <div class="row align-items-center">
                 <div class="col-lg-6 order-lg-2 mb-4 mb-lg-0">
-                    <img src="[URL_FOTO_PROFESIONAL_ANDA]" alt="Foto Profil" class="profile-img shadow-lg">
+                    <img src="https://via.placeholder.com/250x250?text=Foto+Profil" alt="Foto Profil Naufal Palal" class="profile-img shadow-lg">
                 </div>
                 <div class="col-lg-6 order-lg-1 text-lg-start">
-                    <p class="lead text-dark fw-bold" id="greeting-text">Selamat Pagi!</p>
-                    <h1 class="display-3 fw-bolder text-primary">Calon Insinyur TRPL.</h1>
-                    <h2 class="display-6 fw-normal">Web Developer Interaktif.</h2>
-                    <p class="lead mt-4">Mahasiswa TRPL yang ahli dalam membangun antarmuka web yang **responsif** menggunakan **Bootstrap** dan **Tailwind**, siap menciptakan dampak nyata.</p>
-                    <a href="#projects" class="btn btn-primary btn-lg mt-3 me-2 shadow">Lihat Proyek Saya <i class="fas fa-code ms-2"></i></a>
+                    <p class="lead text-white fw-bold" id="greeting-text">Selamat Pagi!</p>
+                    <h1 class="display-3 fw-bolder text-white typing">Calon Insinyur TRPL.</h1>
+                    <h2 class="display-6 fw-normal text-light">Web Developer Interaktif.</h2>
+                    <p class="lead mt-4 text-white">Mahasiswa TRPL yang ahli dalam membangun antarmuka web yang <strong>responsif</strong> menggunakan <strong>Bootstrap</strong> dan <strong>Tailwind</strong>, siap menciptakan dampak nyata.</p>
+                    <a href="#projects" class="btn btn-custom btn-lg mt-3 me-2 shadow">Lihat Proyek Saya <i class="fas fa-code ms-2"></i></a>
+                    <a href="#contact" class="btn btn-outline-light btn-lg mt-3 shadow">Hubungi Saya <i class="fas fa-envelope ms-2"></i></a>
                 </div>
             </div>
         </div>
     </section>
     
     <section id="about" class="py-5">
-        <div class="container fade-in-element">
+        <div class="container fade-in-element" data-aos="fade-up">
             <h2 class="text-center mb-5 fw-bold text-dark">🎯 Tentang & Tujuan Magang</h2>
             <div class="row justify-content-center">
                 <div class="col-lg-10">
                     <blockquote class="blockquote bg-white p-4 border-start border-primary border-5 rounded shadow-sm">
-                        <p class="mb-0">"Sebagai mahasiswa TRPL, saya tidak hanya menulis kode, tetapi merancang solusi. Keahlian **HTML, CSS, dan framework modern (Bootstrap/Tailwind)** adalah alat saya untuk mewujudkan desain yang *pixel-perfect* dan *highly responsive*."</p>
-                        <footer class="blockquote-footer mt-2">[Nama Anda]</footer>
+                        <p class="mb-0">"Sebagai mahasiswa TRPL, saya tidak hanya menulis kode, tetapi merancang solusi. Keahlian <strong>HTML, CSS, dan framework modern (Bootstrap/Tailwind)</strong> adalah alat saya untuk mewujudkan desain yang <em>pixel-perfect</em> dan <em>highly responsive</em>."</p>
+                        <footer class="blockquote-footer mt-2">Naufal Palal</footer>
                     </blockquote>
-                    <p class="mt-4">Saya mencari magang yang berdampak untuk menerapkan ilmu *Software Engineering* dari TRPL, khususnya dalam mengoptimalkan *user experience* dan *front-end performance* pada proyek berskala besar.</p>
+                    <p class="mt-4">Saya mencari magang yang berdampak untuk menerapkan ilmu <em>Software Engineering</em> dari TRPL, khususnya dalam mengoptimalkan <em>user experience</em> dan <em>front-end performance</em> pada proyek berskala besar.</p>
                 </div>
             </div>
         </div>
     </section>
     
     <section id="skills" class="py-5 bg-white">
-        <div class="container fade-in-element">
+        <div class="container fade-in-element" data-aos="fade-up">
             <h2 class="text-center mb-5 fw-bold text-dark">🛠️ Keahlian Teknis</h2>
             <div class="row text-center">
                 <div class="col-md-3 mb-4">
-                    <div class="card p-3 h-100 shadow-sm border-0">
+                    <div class="card p-3 h-100 shadow-sm border-0" data-aos="zoom-in">
                         <i class="fab fa-html5 fa-3x text-danger mb-3"></i>
                         <h5 class="card-title">HTML & CSS Murni</h5>
                         <p class="card-text">Struktur Semantik (HTML5) dan Styling Lanjutan (CSS3 Flex/Grid).</p>
+                        <div class="skill-bar mt-3"><div class="skill-fill" style="width: 95%;"></div></div>
                     </div>
                 </div>
                 <div class="col-md-3 mb-4">
-                    <div class="card p-3 h-100 shadow-sm border-0">
+                    <div class="card p-3 h-100 shadow-sm border-0" data-aos="zoom-in" data-aos-delay="100">
                         <i class="fab fa-bootstrap fa-3x text-primary mb-3"></i>
                         <h5 class="card-title">Bootstrap 5</h5>
                         <p class="card-text">Sistem Grid, Komponen, dan Desain Responsif Cepat.</p>
+                        <div class="skill-bar mt-3"><div class="skill-fill" style="width: 90%;"></div></div>
                     </div>
                 </div>
                 <div class="col-md-3 mb-4">
-                    <div class="card p-3 h-100 shadow-sm border-0">
+                    <div class="card p-3 h-100 shadow-sm border-0" data-aos="zoom-in" data-aos-delay="200">
                         <i class="fas fa-wind fa-3x text-info mb-3"></i>
                         <h5 class="card-title">Tailwind CSS</h5>
                         <p class="card-text">Pendekatan Utility-First untuk Kustomisasi UI yang Lincah.</p>
+                        <div class="skill-bar mt-3"><div class="skill-fill" style="width: 85%;"></div></div>
                     </div>
                 </div>
                 <div class="col-md-3 mb-4">
-                    <div class="card p-3 h-100 shadow-sm border-0">
+                    <div class="card p-3 h-100 shadow-sm border-0" data-aos="zoom-in" data-aos-delay="300">
                         <i class="fab fa-js-square fa-3x text-warning mb-3"></i>
                         <h5 class="card-title">JavaScript & Tools</h5>
                         <p class="card-text">Interaktivitas Dasar, DOM Manipulation, Git/GitHub Version Control.</p>
+                        <div class="skill-bar mt-3"><div class="skill-fill" style="width: 80%;"></div></div>
                     </div>
                 </div>
             </div>
@@ -157,58 +241,58 @@
     </section>
 
     <section id="projects" class="py-5">
-        <div class="container fade-in-element">
+        <div class="container fade-in-element" data-aos="fade-up">
             <h2 class="text-center mb-5 fw-bold text-dark">💡 Proyek Unggulan</h2>
             <div class="row row-cols-1 row-cols-md-3 g-4">
                 
                 <div class="col">
-                    <div class="card h-100 project-card">
-                        <img src="[IMAGE_URL_PROYEK_1]" class="card-img-top" alt="Proyek 1">
+                    <div class="card h-100 project-card" data-aos="flip-left">
+                        <img src="https://via.placeholder.com/400x250?text=Proyek+1" class="card-img-top" alt="Web Data Center Responsif">
                         <div class="card-body">
                             <span class="badge bg-primary mb-2">Bootstrap 5</span>
                             <h5 class="card-title fw-bold">Web Data Center Responsif</h5>
-                            <p class="card-text">Implementasi **Bootstrap Grid** untuk dashboard data center yang kompleks dan *mobile-friendly*.</p>
+                            <p class="card-text">Implementasi <strong>Bootstrap Grid</strong> untuk dashboard data center yang kompleks dan <em>mobile-friendly</em>.</p>
                         </div>
                         <div class="card-footer d-flex justify-content-between">
-                            <a href="[LINK_DEMO_PROYEK_1]" class="btn btn-sm btn-outline-primary" target="_blank">Demo</a>
-                            <a href="[LINK_GITHUB_PROYEK_1]" class="btn btn-sm btn-dark" target="_blank">Kode <i class="fab fa-github"></i></a>
+                            <a href="#" class="btn btn-sm btn-outline-primary" target="_blank">Demo</a>
+                            <a href="#" class="btn btn-sm btn-dark" target="_blank">Kode <i class="fab fa-github"></i></a>
                         </div>
                     </div>
                 </div>
 
                 <div class="col">
-                    <div class="card h-100 project-card">
-                        <img src="[IMAGE_URL_PROYEK_2]" class="card-img-top" alt="Proyek 2">
+                    <div class="card h-100 project-card" data-aos="flip-left" data-aos-delay="100">
+                        <img src="https://via.placeholder.com/400x250?text=Proyek+2" class="card-img-top" alt="Landing Page Kustom">
                         <div class="card-body">
                             <span class="badge bg-info mb-2">Tailwind CSS</span>
                             <h5 class="card-title fw-bold">Landing Page Kustom</h5>
-                            <p class="card-text">Membangun UI cepat dengan **Tailwind CSS**, menekankan desain kustom dan performa loading.</p>
+                            <p class="card-text">Membangun UI cepat dengan <strong>Tailwind CSS</strong>, menekankan desain kustom dan performa loading.</p>
                         </div>
                         <div class="card-footer d-flex justify-content-between">
-                            <a href="[LINK_DEMO_PROYEK_2]" class="btn btn-sm btn-outline-primary" target="_blank">Demo</a>
-                            <a href="[LINK_GITHUB_PROYEK_2]" class="btn btn-sm btn-dark" target="_blank">Kode <i class="fab fa-github"></i></a>
+                            <a href="#" class="btn btn-sm btn-outline-primary" target="_blank">Demo</a>
+                            <a href="#" class="btn btn-sm btn-dark" target="_blank">Kode <i class="fab fa-github"></i></a>
                         </div>
                     </div>
                 </div>
 
                 <div class="col">
-                    <div class="card h-100 project-card">
-                        <img src="[IMAGE_URL_PROYEK_3]" class="card-img-top" alt="Proyek 3">
+                    <div class="card h-100 project-card" data-aos="flip-left" data-aos-delay="200">
+                        <img src="https://via.placeholder.com/400x250?text=Proyek+3" class="card-img-top" alt="Mini Aplikasi Pengubah Warna">
                         <div class="card-body">
                             <span class="badge bg-warning mb-2 text-dark">Interaktif JS</span>
                             <h5 class="card-title fw-bold">Mini Aplikasi Pengubah Warna</h5>
-                            <p class="card-text">Menggunakan **JavaScript** untuk manipulasi DOM dasar dan memberikan interaktivitas pada elemen UI.</p>
+                            <p class="card-text">Menggunakan <strong>JavaScript</strong> untuk manipulasi DOM dasar dan memberikan interaktivitas pada elemen UI.</p>
                         </div>
                         <div class="card-footer d-flex justify-content-between">
-                            <a href="[LINK_DEMO_PROYEK_3]" class="btn btn-sm btn-outline-primary" target="_blank">Demo</a>
-                            <a href="[LINK_GITHUB_PROYEK_3]" class="btn btn-sm btn-dark" target="_blank">Kode <i class="fab fa-github"></i></a>
+                            <a href="#" class="btn btn-sm btn-outline-primary" target="_blank">Demo</a>
+                            <a href="#" class="btn btn-sm btn-dark" target="_blank">Kode <i class="fab fa-github"></i></a>
                         </div>
                     </div>
                 </div>
 
             </div>
             
-            <div class="text-center mt-5 fade-in-element">
+            <div class="text-center mt-5 fade-in-element" data-aos="zoom-in">
                 <a href="https://github.com/naufalpalal" class="btn btn-lg btn-success shadow-lg" target="_blank">
                     Kunjungi Profil GitHub Saya <i class="fab fa-github ms-2"></i>
                 </a>
@@ -217,9 +301,9 @@
     </section>
 
     <section id="contact" class="py-5 bg-dark text-white">
-        <div class="container fade-in-element">
+        <div class="container fade-in-element" data-aos="fade-up">
             <h2 class="fw-bold mb-4 text-warning text-center">🤝 Mari Terhubung!</h2>
-            <p class="lead mb-4 text-center">Saya siap untuk tantangan magang berdampak. Isi formulir di bawah ini, dan kirim melalui email.</p>
+            <p class="lead mb-4 text-center">Saya siap untuk tantangan magang berdampak. Isi formulir di bawah ini, atau hubungi langsung via WhatsApp/Email.</p>
 
             <div class="row justify-content-center">
                 <div class="col-lg-8">
@@ -238,112 +322,7 @@
                         
                         <div class="mb-3">
                             <label for="subject" class="form-label fw-bold">Subjek</label>
-                            <input type="text" class="form-control" id="subject" value="Peluang Magang TRPL - [Nama Anda]" required>
+                            <input type="text" class="form-control" id="subject" value="Peluang Magang TRPL - Naufal Palal" required>
                         </div>
                         
-                        <div class="mb-4">
-                            <label for="message" class="form-label fw-bold">Pesan</label>
-                            <textarea class="form-control" id="message" rows="5" placeholder="Jelaskan peluang atau pertanyaan Anda di sini..." required></textarea>
-                        </div>
-                        
-                        <button type="submit" class="btn btn-primary btn-lg w-100">
-                            <i class="fas fa-paper-plane me-2"></i> Kirim Pesan (Akan Membuka Email)
-                        </button>
-                        <p class="mt-3 text-center small text-dark">Tindakan ini akan membuka aplikasi email default Anda.</p>
-                    </form>
-
-                    <div class="text-center mt-3">
-                        <p class="small text-white-50">Atau langsung ke:</p>
-                        <a href="https://linkedin.com/in/[LINKEDIN_ANDA]" class="btn btn-sm btn-outline-info text-white" target="_blank"><i class="fab fa-linkedin me-2"></i> LinkedIn</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <footer class="bg-dark text-white-50 py-3">
-        <div class="container text-center">
-            <p class="mb-0 small">&copy; 2024 Portofolio [Nama Anda] | TRPL Web Developer.</p>
-        </div>
-    </footer>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    
-    <script>
-        // --- 1. Efek Fade-In saat Scrolling (Tidak Monoton) ---
-        const faders = document.querySelectorAll('.fade-in-element');
-
-        const appearOptions = {
-            threshold: 0,
-            rootMargin: "0px 0px -100px 0px" 
-        };
-
-        const appearOnScroll = new IntersectionObserver(function(entries, appearOnScroll) {
-            entries.forEach(entry => {
-                if (!entry.isIntersecting) {
-                    return;
-                }
-                entry.target.classList.add('is-visible');
-                appearOnScroll.unobserve(entry.target);
-            });
-        }, appearOptions);
-
-        faders.forEach(fader => {
-            appearOnScroll.observe(fader);
-        });
-
-        // --- 2. Greeting Dinamis berdasarkan Waktu (Interaktif) ---
-        function setGreeting() {
-            const date = new Date();
-            const hour = date.getHours();
-            let greeting;
-
-            if (hour >= 5 && hour < 12) {
-                greeting = "Selamat Pagi!";
-            } else if (hour >= 12 && hour < 17) {
-                greeting = "Selamat Siang!";
-            } else if (hour >= 17 && hour < 20) {
-                greeting = "Selamat Sore!";
-            } else {
-                greeting = "Selamat Malam!";
-            }
-            
-            document.getElementById('greeting-text').textContent = greeting;
-        }
-
-        // Panggil fungsi saat halaman dimuat
-        setGreeting();
-        
-        // --- 3. Logika Form Mailto (Membuka Aplikasi Email Pengguna) ---
-        document.getElementById('contactForm').addEventListener('submit', function(event) {
-            event.preventDefault(); // Mencegah form submit default
-
-            // ALAMAT EMAIL TUJUAN ANDA
-            const recipient = 'moh.naufal1987@gmail.com'; 
-            
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const subject = document.getElementById('subject').value;
-            const message = document.getElementById('message').value;
-
-            // Membangun body email yang diisi otomatis
-            const emailBody = 
-                "Halo, Saya tertarik dengan Portofolio TRPL Anda!\n\n" +
-                "Pesan saya:\n" + 
-                message + "\n\n" +
-                "---\n" +
-                "Dari: " + name + "\n" +
-                "Email Balasan: " + email;
-
-            // Encode data untuk URL
-            const mailtoLink = 
-                'mailto:' + recipient + 
-                '?subject=' + encodeURIComponent(subject) + 
-                '&body=' + encodeURIComponent(emailBody);
-
-            // Buka link mailto (membuka aplikasi email)
-            window.location.href = mailtoLink;
-        });
-    </script>
-</body>
-</html>
+                        <div class="mb-
