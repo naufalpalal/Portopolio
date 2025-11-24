@@ -216,14 +216,81 @@
         </div>
     </section>
 
-    <section id="contact" class="py-5 bg-dark text-white">
-        <div class="container text-center fade-in-element">
-            <h2 class="fw-bold mb-4 text-warning">🤝 Mari Terhubung!</h2>
-            <p class="lead mb-4">Saya siap untuk tantangan magang berdampak. Hubungi saya untuk diskusi lebih lanjut.</p>
+   <section id="contact" class="py-5 bg-dark text-white">
+        <div class="container fade-in-element">
+            <h2 class="fw-bold mb-4 text-warning text-center">🤝 Mari Terhubung!</h2>
+            <p class="lead mb-4 text-center">Saya siap untuk tantangan magang berdampak. Hubungi saya untuk diskusi lebih lanjut.</p>
 
-            <a href="mailto:moh.naufal1987@gmail.com" class="btn btn-lg btn-light me-3 mb-2"><i class="fas fa-envelope me-2"></i> Email</a>
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <form id="contactForm" class="p-4 rounded shadow-lg bg-light text-dark">
+                        <div class="mb-3">
+                            <label for="name" class="form-label fw-bold">Nama Anda</label>
+                            <input type="text" class="form-control" id="name" placeholder="Masukkan Nama Lengkap Anda" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label fw-bold">Email Anda</label>
+                            <input type="email" class="form-control" id="email" placeholder="contoh@email.com" required>
+                            <small class="form-text text-muted">Kami tidak akan membagikan email Anda kepada siapapun.</small>
+                        </div>
+                        <div class="mb-3">
+                            <label for="subject" class="form-label fw-bold">Subjek</label>
+                            <input type="text" class="form-control" id="subject" value="Peluang Magang TRPL - [Nama Anda]" required>
+                        </div>
+                        <div class="mb-4">
+                            <label for="message" class="form-label fw-bold">Pesan</label>
+                            <textarea class="form-control" id="message" rows="5" placeholder="Jelaskan peluang atau pertanyaan Anda di sini..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-lg w-100">
+                            <i class="fas fa-paper-plane me-2"></i> Kirim Pesan via Email
+                        </button>
+                    </form>
+
+                    <div class="text-center mt-3">
+                        <p class="small text-white-50">Atau langsung ke:</p>
+                        <a href="https://linkedin.com/in/[LINKEDIN_ANDA]" class="btn btn-sm btn-outline-info text-white" target="_blank"><i class="fab fa-linkedin me-2"></i> LinkedIn</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
+
+    <script>
+        // ... (Kode JavaScript sebelumnya: Fade-In dan Greeting tetap dipertahankan) ...
+
+        // --- 3. Logika Form Mailto (Interaktif) ---
+        document.getElementById('contactForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Mencegah form submit default
+
+            const recipient = 'moh.naufal1987@gmail.com'; // ALAMAT EMAIL TUJUAN
+            
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value;
+
+            // Membangun body email
+            const emailBody = 
+                "Halo [Nama Anda]!\n\n" +
+                "Saya [Nama Pengirim] tertarik dengan portofolio Anda.\n\n" +
+                "Detail Pesan:\n" + 
+                message + "\n\n" +
+                "---\n" +
+                "Dari: " + name + "\n" +
+                "Email Balasan: " + email;
+
+            // Encode data untuk URL
+            const mailtoLink = 
+                'mailto:' + recipient + 
+                '?subject=' + encodeURIComponent(subject) + 
+                '&body=' + encodeURIComponent(emailBody);
+
+            // Buka link mailto
+            window.location.href = mailtoLink;
+        });
+
+        // ... (Akhir Kode JavaScript) ...
+    </script>
 
     <footer class="bg-dark text-white-50 py-3">
         <div class="container text-center">
