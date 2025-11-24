@@ -219,39 +219,37 @@
     <section id="contact" class="py-5 bg-dark text-white">
         <div class="container fade-in-element">
             <h2 class="fw-bold mb-4 text-warning text-center">🤝 Mari Terhubung!</h2>
-            <p class="lead mb-4 text-center">Saya siap untuk tantangan magang berdampak. Isi formulir di bawah ini.</p>
+            <p class="lead mb-4 text-center">Saya siap untuk tantangan magang berdampak. Isi formulir di bawah ini, dan kirim melalui email.</p>
 
             <div class="row justify-content-center">
                 <div class="col-lg-8">
-                    <form action="https://formsubmit.co/moh.naufal1987@gmail.com" method="POST" class="p-4 rounded shadow-lg bg-light text-dark">
+                    <form id="contactForm" class="p-4 rounded shadow-lg bg-light text-dark">
                         
                         <div class="mb-3">
                             <label for="name" class="form-label fw-bold">Nama Anda</label>
-                            <input type="text" name="Nama_Pengirim" class="form-control" id="name" placeholder="Masukkan Nama Lengkap Anda" required>
+                            <input type="text" class="form-control" id="name" placeholder="Masukkan Nama Lengkap Anda" required>
                         </div>
                         
                         <div class="mb-3">
                             <label for="email" class="form-label fw-bold">Email Balasan</label>
-                            <input type="email" name="_replyto" class="form-control" id="email" placeholder="contoh@email.com" required>
-                            <small class="form-text text-muted">Kami akan menggunakan email ini untuk membalas pesan Anda.</small>
+                            <input type="email" class="form-control" id="email" placeholder="contoh@email.com" required>
+                            <small class="form-text text-muted">Aplikasi email akan menggunakan ini sebagai alamat balasan.</small>
                         </div>
                         
                         <div class="mb-3">
                             <label for="subject" class="form-label fw-bold">Subjek</label>
-                            <input type="text" name="_subject" class="form-control" id="subject" value="Peluang Magang TRPL - [Nama Anda]" required>
+                            <input type="text" class="form-control" id="subject" value="Peluang Magang TRPL - [Nama Anda]" required>
                         </div>
                         
                         <div class="mb-4">
                             <label for="message" class="form-label fw-bold">Pesan</label>
-                            <textarea name="Pesan" class="form-control" id="message" rows="5" placeholder="Jelaskan peluang atau pertanyaan Anda di sini..." required></textarea>
+                            <textarea class="form-control" id="message" rows="5" placeholder="Jelaskan peluang atau pertanyaan Anda di sini..." required></textarea>
                         </div>
                         
-                        <input type="hidden" name="_next" value="[LINK_PORTOFOLIO_ANDA]/index.html?success=true">
-                        
                         <button type="submit" class="btn btn-primary btn-lg w-100">
-                            <i class="fas fa-paper-plane me-2"></i> Kirim Pesan
+                            <i class="fas fa-paper-plane me-2"></i> Kirim Pesan (Akan Membuka Email)
                         </button>
-                        <p class="mt-3 text-center small text-dark">Menggunakan layanan FormSubmit untuk pengiriman langsung.</p>
+                        <p class="mt-3 text-center small text-dark">Tindakan ini akan membuka aplikasi email default Anda.</p>
                     </form>
 
                     <div class="text-center mt-3">
@@ -277,7 +275,7 @@
 
         const appearOptions = {
             threshold: 0,
-            rootMargin: "0px 0px -100px 0px" // Muncul 100px sebelum elemen mencapai dasar viewport
+            rootMargin: "0px 0px -100px 0px" 
         };
 
         const appearOnScroll = new IntersectionObserver(function(entries, appearOnScroll) {
@@ -310,14 +308,42 @@
                 greeting = "Selamat Malam!";
             }
             
-            // Tampilkan di elemen dengan id 'greeting-text'
             document.getElementById('greeting-text').textContent = greeting;
         }
 
         // Panggil fungsi saat halaman dimuat
         setGreeting();
         
-        // CATATAN: Fungsi mailto yang lama sudah dihapus, FormSubmit menangani pengiriman.
+        // --- 3. Logika Form Mailto (Membuka Aplikasi Email Pengguna) ---
+        document.getElementById('contactForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Mencegah form submit default
+
+            // ALAMAT EMAIL TUJUAN ANDA
+            const recipient = 'moh.naufal1987@gmail.com'; 
+            
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value;
+
+            // Membangun body email yang diisi otomatis
+            const emailBody = 
+                "Halo, Saya tertarik dengan Portofolio TRPL Anda!\n\n" +
+                "Pesan saya:\n" + 
+                message + "\n\n" +
+                "---\n" +
+                "Dari: " + name + "\n" +
+                "Email Balasan: " + email;
+
+            // Encode data untuk URL
+            const mailtoLink = 
+                'mailto:' + recipient + 
+                '?subject=' + encodeURIComponent(subject) + 
+                '&body=' + encodeURIComponent(emailBody);
+
+            // Buka link mailto (membuka aplikasi email)
+            window.location.href = mailtoLink;
+        });
     </script>
 </body>
 </html>
